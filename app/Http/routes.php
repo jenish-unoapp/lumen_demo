@@ -17,7 +17,8 @@ $app->get('/', [ function () use ($app) {
 }]);
 
 $app->post("/api/auth/login", [
-    'as' => 'login', 'uses' => 'AuthApiController@login'
+    'as' => 'login', 
+    'uses' => 'AuthApiController@login'
 ]);
 
 $app->get("/api/user/me", [
