@@ -1,2 +1,5 @@
 /vendor
 .env
+/front_end/bower_components/
+/front_end/node_modules/
+/public/front_end/

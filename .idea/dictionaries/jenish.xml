@@ -3,6 +3,8 @@
     <words>
       <w>attrs</w>
       <w>fillable</w>
+      <w>javascripts</w>
+      <w>requirejs</w>
       <w>userid</w>
     </words>
   </dictionary>

@@ -11,13 +11,13 @@
 |
 */
 
-$app->get('/', [ function () use ($app) {
+$app->get('/', [function () use ($app) {
     //$environment = app()->environment();
-    return view('index', ['name' => 'James']);
+    return view('index', ['name' => 'James', "base_url" => url("/")]);
 }]);
 
 $app->post("/api/auth/login", [
-    'as' => 'login', 
+    'as' => 'login',
     'uses' => 'AuthApiController@login'
 ]);
 

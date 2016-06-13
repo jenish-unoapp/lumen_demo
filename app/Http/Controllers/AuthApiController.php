@@ -39,7 +39,6 @@ class AuthApiController extends BaseApiController
                 $resp = RestResponseFactory::badrequest((object)array(), "" . implode("", $errors) . "");
                 return $resp->toJSON();
             }
-            dump_die($req);
 
             if ($auth = AuthToken::login($req['email'], $req['password'])) {
                 //dump_die($auth->UserId);
