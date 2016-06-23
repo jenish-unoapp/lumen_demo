@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jenish
- * Date: 02-05-2016
- * Time: PM 04:53
- */
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="front_end/css/app.css" rel="stylesheet" type="text/css" media='all'>
     <script data-main="front_end/js/entry.js" src="front_end/js/vendor/require.js"></script>
-    <title><?= $name ?></title>
+    <title>{{ $name  }}</title>
 </head>
 <body>
 <div class="container">
     <div data-ng-view=""></div>
 </div>
-<input type="hidden" id="hdnRootUrl" value="<?= $base_url ?>">
+<input type="hidden" id="hdnRootUrl" value="{{ $base_url  }}">
 </body>
 </html>
