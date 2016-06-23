@@ -13,6 +13,8 @@ use Illuminate\Support\ServiceProvider;
 class HelperServiceProvider extends ServiceProvider
 {
 
+    private $files = array();
+
     /**
      * Register the service provider.
      *
@@ -20,9 +22,29 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        foreach (glob(__DIR__.'\..\Helpers\*.php') as $filename){
+        $recursive_path = __DIR__ . '/../Helpers';
+
+        $this->require_once_dir($recursive_path . "/*");
+
+        for ($f = 0; $f < count($this->files); $f++) {
+            $file = $this->files[$f];
             /** @noinspection PhpIncludeInspection */
-            require_once($filename);
+            require_once($file);
+        }
+
+    }
+
+
+    public function require_once_dir($dir)
+    {
+        $item = glob($dir);
+        foreach ($item as $filename) {
+            if (is_dir($filename)) {
+                $this->require_once_dir($filename . '/' . "*");
+            } elseif (is_file($filename)) {
+                $this->files[] = $filename;
+            }
         }
     }
+
 }

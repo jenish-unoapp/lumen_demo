@@ -4,6 +4,7 @@
       <w>attrs</w>
       <w>fillable</w>
       <w>javascripts</w>
+      <w>monolog</w>
       <w>requirejs</w>
       <w>userid</w>
     </words>

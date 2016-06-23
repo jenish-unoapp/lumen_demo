@@ -2,11 +2,6 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-//require_once 'Helpers/RestResponse.php';
-//require_once 'Helpers/RestResponseFactory.php';
-//require_once 'Helpers/Constants.php';
-//require_once 'Helpers/HelperFunctions.php';
-
 try {
     (new Dotenv\Dotenv(__DIR__ . '/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
@@ -117,6 +112,27 @@ $app->register(App\Providers\HelperServiceProvider::class);
 
 $app->group(['namespace' => 'App\Http\Controllers'], function ($app) {
     require __DIR__ . '/../app/Http/routes.php';
+});
+
+$app->configureMonologUsing(function ($monolog) {
+    if (app()->environment('local', 'staging'))
+        $monolog->pushHandler(new Monolog\Handler\FirePHPHandler());
+    $monolog->pushHandler((new Monolog\Handler\StreamHandler(storage_path('logs/lumen.log'), \Monolog\Logger::DEBUG))
+        ->setFormatter(new Monolog\Formatter\LineFormatter(null, null, true, true)));
+
+    return $monolog;
+});
+
+DB::listen(function ($query) {
+    if (boolval(env('APP_DEBUG'))) {
+        Log::addInfo("Sql Executed at " . date("Y-m-d H:i:s"), array(
+            "sql" => $query->sql,
+            "bindings" => $query->bindings,
+            "connectionName" => $query->connectionName,
+            "connection" => $query->connection,
+            "time" => $query->time
+        ));
+    }
 });
 
 return $app;

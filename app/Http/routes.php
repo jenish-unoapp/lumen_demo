@@ -21,8 +21,6 @@ $app->post("/api/auth/login", [
     'uses' => 'AuthApiController@login'
 ]);
 
-$app->get("/api/user/me", [
-    'as' => 'me',
-    'uses' => 'UserApiController@me',
-    'middleware' => 'auth.api'
+$app->get("/api/test", [
+    'uses' => 'ApiCommonController@test'
 ]);
