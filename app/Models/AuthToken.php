@@ -12,6 +12,9 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed Id
+ */
 class AuthToken extends Model
 {
 

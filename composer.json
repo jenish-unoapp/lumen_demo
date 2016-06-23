@@ -12,7 +12,9 @@
     "php": ">=5.5.9",
     "laravel/lumen-framework": "5.2.*",
     "vlucas/phpdotenv": "~2.2",
-    "anahkiasen/underscore-php": "^2.0"
+    "anahkiasen/underscore-php": "^2.0",
+    "lstrojny/functional-php": "^1.2",
+    "danielstjules/stringy": "^2.3"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",

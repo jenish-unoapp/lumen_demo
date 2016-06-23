@@ -21,11 +21,12 @@ class ExampleListener
     /**
      * Handle the event.
      *
-     * @param  ExampleEvent  $event
+     * @param  ExampleEvent $event
      * @return void
      */
     public function handle(ExampleEvent $event)
     {
+        dump_die($event);
         //
     }
 }
