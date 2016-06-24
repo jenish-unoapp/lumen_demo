@@ -27,6 +27,7 @@ $app->withFacades();
 
 $app->withEloquent();
 
+class_alias('Illuminate\Support\Facades\Mail', 'Mail');
 class_alias('Illuminate\Support\Facades\App', 'App');
 class_alias('Illuminate\Support\Facades\Request', 'Request');
 /*
@@ -94,10 +95,11 @@ $app->routeMiddleware([
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\HelperServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -124,7 +126,7 @@ $app->configureMonologUsing(function ($monolog) {
 });
 
 DB::listen(function ($query) {
-    if (boolval(env('APP_DEBUG'))) {
+    if (boolval(env('APP_DEBUG')) && boolval(env('LOG_SQL_QUERY'))) {
         Log::addInfo("Sql Executed at " . date("Y-m-d H:i:s"), array(
             "sql" => $query->sql,
             "bindings" => $query->bindings,

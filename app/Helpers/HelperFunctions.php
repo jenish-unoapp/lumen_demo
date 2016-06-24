@@ -36,3 +36,25 @@ if (!function_exists('get_request_json_arr')) {
         return $request;
     }
 }
+
+if (!function_exists('sendMail')) {
+    /**
+     * Send Mail Helper Function that invoke send mail event
+     * @param array $to
+     * @param string $subject
+     * @param bool $is_raw
+     * @param string $view_name
+     * @param array|null $view_data
+     * @param string $raw_message
+     * @return int
+     */
+    function sendMail($to, $subject, $is_raw, $view_name, $view_data, $raw_message)
+    {
+        $job = new App\Jobs\SendMailJob($to, $subject, $is_raw, $view_name, $view_data, $raw_message);
+        $job->onQueue('email');
+        //$job->delay(10);
+        dispatch($job);
+        //event(new \App\Events\SendMailEvent($to, $subject, $is_raw, $view_name, $view_data, $raw_message));
+        return 0;
+    }
+}

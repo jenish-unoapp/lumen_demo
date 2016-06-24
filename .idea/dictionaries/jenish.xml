@@ -4,8 +4,12 @@
       <w>attrs</w>
       <w>fillable</w>
       <w>javascripts</w>
+      <w>mailgun</w>
       <w>monolog</w>
       <w>requirejs</w>
+      <w>sendmail</w>
+      <w>smtp</w>
+      <w>unoindia</w>
       <w>userid</w>
     </words>
   </dictionary>

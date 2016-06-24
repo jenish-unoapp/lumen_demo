@@ -4,14 +4,15 @@ namespace App\Jobs;
 
 class ExampleJob extends Job
 {
+    private $data;
+
     /**
      * Create a new job instance.
-     *
-     * @return void
+     * @param array $data
      */
-    public function __construct()
+    public function __construct(array $data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -21,6 +22,6 @@ class ExampleJob extends Job
      */
     public function handle()
     {
-        //
+        \Log::addInfo("Jobs Data Dump", array("data" => $this->data, "time" => date("Y-m-d H:i:s")));
     }
 }

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ExampleEvent;
+use App\Jobs\ExampleJob;
 use App\Models\AuthToken;
 use Carbon\Carbon;
 use function Functional\drop_first;
@@ -20,6 +21,7 @@ use function Functional\none;
 use function Functional\reject;
 use function Functional\select;
 use function Functional\some;
+use Mail;
 use Stringy\Stringy as S;
 use RestResponseFactory;
 use Underscore\Types\Arrays;
@@ -37,12 +39,25 @@ class ApiCommonController extends BaseApiController
     {
         $array = array(1, 2, 3);
 
+
+        //sendMail(['jenish@unoindia.co'], "Demo", true, "", null, "Raw Mail Message");
+        sendMail(['jenish@unoindia.co'], "Demo3", false, "mail.demo_mail", ['text' => "Hello This is Html3"], "");
+
+        $resp = RestResponseFactory::ok($array);
+        return $resp->toJSON();
+
         // Doc http://anahkiasen.github.io/underscore-php/
         /** @var Arrays $d */
         $d = Arrays::each($array, function ($value) {
             return $value * $value * $value;
         });
 
+        //dump_die(config('mail'));
+        //Mail::send()
+        /*Mail::raw('Raw string email', function ($msg) {
+            $msg->subject('Demo');
+            $msg->to(['jenish@unoindia.co', 'hiren@unoindia.co']);
+        });*/
 
         $auth = AuthToken::all();
 
